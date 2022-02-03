@@ -19,51 +19,56 @@ namespace GTExtractXMLMeterDatatoCSV
             string input = "";
             string xmlFile = "";
             string[] csvData = null;
+            bool isExit = false;
 
-            while (!Array.Exists(validInput, inp => inp.Contains(input)) || String.IsNullOrEmpty(input))
+            while (!isExit)
             {
-                if (!String.IsNullOrEmpty(input))
-                Console.Write("Invalid Input, ");
-                Console.WriteLine("Please choose From the following options:");
-                Console.WriteLine("1 - From the projects resource file Resources/CleanTestFile.xml \n");
-                Console.WriteLine(String.Format("2 - From Desktop {0}" , xmlInputFilepath));
-                Console.WriteLine("\t Please make sure the above file path exists to avoid any errors \n");
-
-                Console.WriteLine("3 - Exit");
-
-                input = Console.ReadLine();
-            }
-
-            switch (input)
-            {
-                case "1":
-                    xmlFile = Resource.CleanTestFile;
-                break;
-                case "2":
-                    xmlFile = helper.uploadXML(xmlInputFilepath);
-                break;
-                default:
-                    Environment.Exit(0);
-                 break;
-
-            }
-
-            if(!String.IsNullOrEmpty(xmlFile))
-                csvData = cSVMeterData.ExtractCSVMeterData(xmlFile);
-            //always validate if the xml file is valid
-            if (csvData != null) { 
-
-                if (cSVMeterData.IsCSVMeterDataXMLValid(csvData))
+                while (!Array.Exists(validInput, inp => inp.Contains(input)) || String.IsNullOrEmpty(input))
                 {
-                    cSVMeterData.ProcessCSVMeterData(csvData, csvOutputFilepath);
+                    if (!String.IsNullOrEmpty(input))
+                        Console.Write("Invalid Input, ");
+                    Console.WriteLine("Please choose From the following options:");
+                    Console.WriteLine("1 - From the projects resource file Resources/CleanTestFile.xml \n");
+                    Console.WriteLine(String.Format("2 - From Desktop {0}", xmlInputFilepath));
+                    Console.WriteLine("\t Please make sure the above file path exists to avoid any errors \n");
+
+                    Console.WriteLine("3 - Exit");
+
+                    input = Console.ReadLine();
                 }
-                else
+
+                switch (input)
                 {
-                    Console.WriteLine("Invalid XML Data");
+                    case "1":
+                        xmlFile = Resource.CleanTestFile;
+                        break;
+                    case "2":
+                        xmlFile = helper.uploadXML(xmlInputFilepath);
+                        break;
+                    default:
+                        isExit = true;
+                        Environment.Exit(0);
+                        break;
+
                 }
+                input = "";
+                if (!String.IsNullOrEmpty(xmlFile))
+                    csvData = cSVMeterData.ExtractCSVMeterData(xmlFile);
+                //always validate if the xml file is valid
+                if (csvData != null)
+                {
+
+                    if (cSVMeterData.IsCSVMeterDataXMLValid(csvData))
+                    {
+                        cSVMeterData.ProcessCSVMeterData(csvData, csvOutputFilepath);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid XML Data");
+                    }
+                }
+
             }
-
-
         }
     }
 }

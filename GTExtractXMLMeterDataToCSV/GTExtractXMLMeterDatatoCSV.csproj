@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CSVOutputFile\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Resources\testfile.xml" />
   </ItemGroup>
 

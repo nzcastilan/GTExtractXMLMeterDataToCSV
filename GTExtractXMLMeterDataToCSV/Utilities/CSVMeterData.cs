@@ -150,8 +150,13 @@ namespace GTExtractXMLMeterDatatoCSV.Utilities
                     }
 
                 }
-                Console.WriteLine(String.Format("CSV Files was created at {0}",path));
-            }catch(Exception ex)
+
+                Console.WriteLine(new String('-',100));
+                Console.WriteLine(String.Format("\n CSV Files was created at {0} \n",path));
+                Console.WriteLine(new String('-', 100));
+
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
            
