@@ -37,7 +37,15 @@ namespace GentractTechnicalUnitTest
         {
             CSVMeterData cSVMeterData= new CSVMeterData();
             string [] rawCsvMeterData = Resource.InvalidElement999.Split("\n", StringSplitOptions.RemoveEmptyEntries).Select(p => p.Trim()).ToArray();
-            Assert.Throws<InvalidOperationException>(() => cSVMeterData.ProcessCSVMeterData(rawCsvMeterData, ""));
+            try
+            {
+                cSVMeterData.ProcessCSVMeterData(rawCsvMeterData,"");
+                Assert.Fail();
+            }catch(Exception ex)
+            {
+                Assert.Pass(ex.Message);
+
+            }
 
         }
     
