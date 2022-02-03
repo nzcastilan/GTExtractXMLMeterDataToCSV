@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using GTExtractXMLMeterDatatoCSV.Utilities;
 using System.Collections.Generic;
+using System.IO;
 
 namespace GentractTechnicalUnitTest
 {
@@ -24,6 +25,25 @@ namespace GentractTechnicalUnitTest
             string searchText = "222";
             List<int> indices = helper.GetIndicesOfString(searchData, searchText);
             Assert.IsTrue(indices.Count == 0);
+
+        }
+
+        [Test]
+        public void Upload_ValidFilePath()
+        {
+            Helpers helper = new Helpers();
+            string filePath = Path.Combine(System.IO.Path.GetFullPath(@"..\..\..\"), @"Resources\CleanTestFile.xml");
+            string xml =  helper.uploadXML(filePath);
+            Assert.IsTrue(!string.IsNullOrEmpty(xml));
+
+        }
+        [Test]
+        public void Upload_InValidFilePath()
+        {
+            Helpers helper = new Helpers();
+            string filePath = Path.Combine(System.IO.Path.GetFullPath(@"..\..\..\"), @"Resources\InvalidFile.xml");
+            string xml = helper.uploadXML(filePath);
+            Assert.IsTrue(string.IsNullOrEmpty(xml));
 
         }
 
