@@ -23,6 +23,10 @@ namespace GTExtractXMLMeterDatatoCSV
 
             while (!isExit)
             {
+                xmlFile = "";
+                input = "";
+                csvData = null;
+
                 while (!Array.Exists(validInput, inp => inp.Contains(input)) || String.IsNullOrEmpty(input))
                 {
                     if (!String.IsNullOrEmpty(input))
@@ -31,7 +35,6 @@ namespace GTExtractXMLMeterDatatoCSV
                     Console.WriteLine("1 - From the projects resource file Resources/CleanTestFile.xml \n");
                     Console.WriteLine(String.Format("2 - From Desktop {0}", xmlInputFilepath));
                     Console.WriteLine("\t Please make sure the above file path exists to avoid any errors \n");
-
                     Console.WriteLine("3 - Exit");
 
                     input = Console.ReadLine();
@@ -51,7 +54,7 @@ namespace GTExtractXMLMeterDatatoCSV
                         break;
 
                 }
-                input = "";
+           
                 if (!String.IsNullOrEmpty(xmlFile))
                     csvData = cSVMeterData.ExtractCSVMeterData(xmlFile);
                 //always validate if the xml file is valid
