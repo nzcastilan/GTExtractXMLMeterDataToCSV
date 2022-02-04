@@ -26,7 +26,9 @@ namespace GTExtractXMLMeterDatatoCSV.Utilities
                 }
             }catch(Exception ex)
             {
+                Console.WriteLine(new String('!', 100));
                 Console.WriteLine(ex.Message);
+                Console.WriteLine(new String('!', 100));
             }
             return contents;
         }
